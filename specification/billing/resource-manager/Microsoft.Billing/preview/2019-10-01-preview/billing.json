@@ -158,6 +158,114 @@
         }
       }
     },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/auditLogs": {
+      "get": {
+        "tags": [
+          "BillingAuditLogs"
+        ],
+        "x-ms-examples": {
+          "BillingAuditLogs": {
+            "$ref": "./examples/BillingAuditLogs.json"
+          }
+        },
+        "operationId": "BillingAuditLogs_Get",
+        "description": "Gets billing audit logs by userId and billing account name",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountNameParameter"
+          },
+          {
+            "name": "$startDate",
+            "description": "Start datetime from which logs are requested. ",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$endDate",
+            "description": "End datetime till which logs are requested. ",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$operationType",
+            "description": "Operation type on the basis of which logs will be filtered. ",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/BillingAuditLogs"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/auditLogsExtended": {
+      "get": {
+        "tags": [
+          "BillingAuditLogs"
+        ],
+        "x-ms-examples": {
+          "BillingAuditLogsExtended": {
+            "$ref": "./examples/BillingAuditLogsExtended.json"
+          }
+        },
+        "operationId": "BillingAuditLogsExtended_Get",
+        "description": "Gets detailed billing audit logs by reference guid and billing account name",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountReferenceGuidParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/BillingAuditLogsExtended"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Retry-After": {
+                "description": "Recommended time to wait before making another request to check the status of the operation. The time is specified in seconds.",
+                "type": "integer"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/listInvoiceSectionsWithCreateSubscriptionPermission": {
       "post": {
         "tags": [
